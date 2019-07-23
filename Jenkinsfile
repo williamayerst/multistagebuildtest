@@ -3,13 +3,14 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'echo RUNNING BUILD'
+                sh 'docker build . -t hello'
             }
         }
         stage('Test') {
             steps {
-                sh 'echo RUNNING TEST'
+                sh 'docker run hello'
             }
         }
     }
 }
+
