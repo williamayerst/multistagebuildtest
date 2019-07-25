@@ -9,7 +9,7 @@ USER root
 
 # Install Dotnet
 RUN apt-get install software-properties-common  -y -qq --no-install-recommends \
-    && add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe" \
+    && add-apt-repository "deb http://archive.ubuntu.com/ubuntu xenial universe" \
     && apt-get update  -qq \
     && apt-get install apt-transport-https -y -qq --no-install-recommends 
 
