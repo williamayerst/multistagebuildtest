@@ -21,7 +21,7 @@ RUN wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsof
 RUN apt-get update  -qq \
     && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 40976EAF437D05B5 \
     && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32 \
-    && apt-get install dotnet-sdk-2.2
+    && apt-get install dotnet-sdk-2.2 -y -qq --no-install-recommends
 
 # Update image
 RUN apt-get update -qq && apt-get install -y -qq --no-install-recommends \
