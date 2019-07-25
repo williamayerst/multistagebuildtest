@@ -8,7 +8,8 @@ USER root
 
 
 # Install Dotnet
-RUN add-apt-repository universe \
+RUN apt-get install software-properties-common \
+    && add-apt-repository universe \
     && apt-get update  -qq \
     && apt-get install apt-transport-https -y -qq --no-install-recommends 
 
