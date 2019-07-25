@@ -18,7 +18,8 @@ RUN wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsof
     && dpkg -i packages-microsoft-prod.deb
 
 # Install Dotnet
-RUN apt-get install dotnet-sdk-2.2
+RUN apt-get update  -qq \
+    && apt-get install dotnet-sdk-2.2
 
 # Update image
 RUN apt-get update -qq && apt-get install -y -qq --no-install-recommends \
