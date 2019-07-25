@@ -47,5 +47,5 @@ RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add 
 #   && chmod +x /usr/local/bin/kubectl
 
 # Install Kustomize
-RUN wget -O $KustomizeBinaryPath $KustomizeDownloadPath && chmod +x $KustomizeBinaryPath \
-    && $KustomizeBinaryPath version
+RUN wget -O /usr/local/bin/kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v2.0.3/kustomize_2.0.3_linux_amd64 \
+    && chmod +x /usr/local/bin/kustomize
