@@ -8,7 +8,7 @@ USER root
 
 # Add MS Key and install dependencies
 RUN wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
-    && RUN sudo dpkg -i packages-microsoft-prod.deb
+    && dpkg -i packages-microsoft-prod.deb
 
 # Install Dotnet
 RUN add-apt-repository universe \
