@@ -6,15 +6,18 @@ ENV DOCKER_VERSION=17.04.0-ce DOCKER_COMPOSE_VERSION=1.14.0
 
 USER root
 
+
+# Install Dotnet
+RUN add-apt-repository universe \
+    && apt-get update  -qq \
+    && apt-get install apt-transport-https -y -qq --no-install-recommends 
+
 # Add MS Key and install dependencies
 RUN wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
     && dpkg -i packages-microsoft-prod.deb
 
 # Install Dotnet
-RUN add-apt-repository universe \
-    && apt-get install apt-transport-https -y -qq --no-install-recommends\
-    && apt-get update  -qq \
-    && apt-get install dotnet-sdk-2.2
+RUN apt-get install dotnet-sdk-2.2
 
 # Update image
 RUN apt-get update -qq && apt-get install -y -qq --no-install-recommends \
