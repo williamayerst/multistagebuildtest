@@ -6,8 +6,8 @@ pipeline {
         azure_subscription_id = credentials('azure_subscription_id')
         docker_dockerfilePath = './'
         docker_imageName = 'hello'
-        docker_imageTag = "0.0.$BUILD_ID-$GIT_BRANCH"
-        docker_containerRegistry = "$docker_containerRegistryName.azurecr.io"
+        docker_imageTag = '0.0.${BUILD_ID}-${GIT_BRANCH}'
+        docker_containerRegistry = '${docker_containerRegistryName}.azurecr.io'
         docker_containerRegistryName = 'amidostacksacrukstmp'
         kubernetes_ClusterRG = 'amido-stacks-rg-uks-dev'
         kubernetes_ClusterName = 'amido-stacks-cluster-uks-dev'
