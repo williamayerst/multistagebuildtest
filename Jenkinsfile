@@ -4,11 +4,11 @@ pipeline {
         azure_client    = credentials('terraform')
         azure_tenant_id = credentials('azure_tenant_id')
         azure_subscription_id = credentials('azure_subscription_id')
-        docker_dockerfilePath = 'src/api/'
-        docker_imageName = 'menu-api'
+        docker_dockerfilePath = './'
+        docker_imageName = 'hello'
         docker_imageTag = '0.0.$BUILD_ID-$GIT_BRANCH'
         docker_containerRegistry = '$docker_containerRegistryName.azurecr.io'
-        docker_containerRegistryName = 'amidouksstacksacrnp'
+        docker_containerRegistryName = 'amidostacksacrukstmp'
     }
     stages {
         stage('Build') {
