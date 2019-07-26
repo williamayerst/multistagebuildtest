@@ -17,7 +17,7 @@ pipeline {
         }
         stage('Login') {
             steps {
-                sh '/home/jenkins/DevOps/Azure/set-azure-context.sh $azure_tenant_id $azure_subscription_id $terraform_usr $terraform_psw'
+                sh '/home/jenkins/DevOps/Azure/set-azure-context.sh $azure_tenant_id $azure_subscription_id $azure_client_USR $azure_client_PSW'
             }
         }
     }
