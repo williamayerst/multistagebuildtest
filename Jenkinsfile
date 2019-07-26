@@ -17,7 +17,8 @@ pipeline {
         }
         stage('Login') {
             steps {
-                sh '/home/jenkins/DevOps/Azure/set-azure-context.sh $AZURE_TENANT_ID $AZURE_SUBSCRIPTION_ID $AZURE_CLIENT_USR $AZURE_CLIENT_PSW'
+                sh 'printenv'
+                sh 'bash /home/jenkins/DevOps/Azure/set-azure-context.sh $AZURE_TENANT_ID $AZURE_SUBSCRIPTION_ID $AZURE_CLIENT_USR $AZURE_CLIENT_PSW'
             }
         }
     }
