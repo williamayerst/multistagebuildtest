@@ -1,8 +1,10 @@
 pipeline {
     agent any
         environment {
-        AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
-        AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
+        azure_client    = credentials('terraform')
+        azure_tenant_id = credentials('azure_tenant_id')
+        azure_subscription_id = credentials('azure_subscription_id')
+
     }
     stages {
         stage('Build') {
@@ -11,12 +13,12 @@ pipeline {
                 sh 'mkdir ~/DevOps'
                 sh 'tar -xvzf ~/scripts-0.0.10-master.tar.gz -C /home/jenkins/DevOps'
                 sh 'pwd'
-                sh 'ls -lp1'
+                sh 'ls -lp1 /home/jenkins/DevOps'
             }
         }
-        stage('Test') {
+        stage('Login') {
             steps {
-                sh 'docker run hello'
+                sh '/home/jenkins/DevOps/Azure/set-azure-context.sh $AZURE_TENANT_ID $AZURE_SUBSCRIPTION_ID $AZURE_CLIENT_USR $AZURE_CLIENT_PSW'
             }
         }
     }
