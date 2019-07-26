@@ -27,6 +27,7 @@ pipeline {
                 sh 'az acr login --name $docker_containerRegistryName'
                 sh '/home/jenkins/DevOps/Azure/set-aks-context.sh $kubernetes_ClusterRG $kubernetes_ClusterName'
             }
+        }
         stage('Docker Build & Push') {
             steps {
                 sh 'printenv | sort > printenv.sorted && cat printenv.sorted'
@@ -38,4 +39,3 @@ pipeline {
         }
     }
 }
-
