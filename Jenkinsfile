@@ -7,7 +7,8 @@ pipeline {
         docker_dockerfilePath = 'src/api/'
         docker_imageName = 'menu-api'
         docker_imageTag = '0.0.$BUILD_ID-$GIT_BRANCH'
-        docker_containerRegistry = 'amidouksstacksacrnp.azurecr.io'
+        docker_containerRegistry = '$docker_containerRegistryName.azurecr.io'
+        docker_containerRegistryName = 'amidouksstacksacrnp'
     }
     stages {
         stage('Build') {
@@ -21,10 +22,10 @@ pipeline {
         stage('Login') {
             steps {
                 sh '/home/jenkins/DevOps/Azure/set-azure-context.sh $azure_tenant_id $azure_subscription_id $azure_client_USR $azure_client_PSW'
-                sh 'az acr login --name amidouksstacksacrnp \
-                    && cd $docker_dockerfilePath \ 
-                    && docker build . -t $(docker_imageName):$(docker_imageTag) -t $(docker_containerRegistry)/$(docker_imageName):$(docker_imageTag) -t $(docker_containerRegistry)/$(docker_imageName):latest
-                    && docker push $(docker_containerRegistry)/$(docker_imageName)'
+                sh 'az acr login --name $docker_containerRegistryName'
+                sh 'cd $docker_dockerfilePath'
+                sh 'docker build . -t $(docker_imageName):$(docker_imageTag) -t $(docker_containerRegistry)/$(docker_imageName):$(docker_imageTag) -t $(docker_containerRegistry)/$(docker_imageName):latest'
+                sh 'docker push $(docker_containerRegistry)/$(docker_imageName)'
             }
         }
     }
