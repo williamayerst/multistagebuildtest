@@ -6,7 +6,7 @@ pipeline {
         azure_subscription_id = credentials('azure_subscription_id')
         docker_dockerfilePath = './'
         docker_imageName = 'hello'
-        docker_imageTag = "0.0.${BUILD_ID}-${GIT_BRANCH}"
+        docker_imageTag = "0.0.${BUILD_ID}"
         docker_containerRegistry = "${docker_containerRegistryName}.azurecr.io"
         docker_containerRegistryName = 'amidostacksacrukstmp'
         kubernetes_ClusterRG = 'amido-stacks-rg-uks-dev'
@@ -30,10 +30,9 @@ pipeline {
         }
         stage('Docker Build & Push') {
             steps {
-                sh 'export docker_imageTagRevised = $(sed "s/origin\///g" <<<"$docker_imageTag")'
                 sh 'cd $docker_dockerfilePath'
-                sh 'echo "docker build . -t $docker_imageName:$docker_imageTagRevised -t $docker_containerRegistry/$docker_imageName:$docker_imageTagRevised -t $docker_containerRegistry/$docker_imageName:latest"'
-                sh 'docker build . -t $docker_imageName:$docker_imageTagRevised -t $docker_containerRegistry/$docker_imageName:$docker_imageTagRevised -t $docker_containerRegistry/$docker_imageName:latest'
+                sh 'echo "docker build . -t $docker_imageName:$docker_imageTag -t $docker_containerRegistry/$docker_imageName:$docker_imageTag -t $docker_containerRegistry/$docker_imageName:latest"'
+                sh 'docker build . -t $docker_imageName:$docker_imageTag -t $docker_containerRegistry/$docker_imageName:$docker_imageTag -t $docker_containerRegistry/$docker_imageName:latest'
                 sh 'docker push $docker_containerRegistry/$docker_imageName'
             }
         }
