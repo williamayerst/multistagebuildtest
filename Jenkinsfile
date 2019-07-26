@@ -30,10 +30,10 @@ pipeline {
         }
         stage('Docker Build & Push') {
             steps {
-                sh 'printenv | sort > printenv.sorted && cat printenv.sorted'
+                sh 'export docker_imageTagRevised = $(sed "s/origin\///g" <<<"$docker_imageTag")'
                 sh 'cd $docker_dockerfilePath'
-                sh 'echo "docker build . -t $docker_imageName:$docker_imageTag -t $docker_containerRegistry/$docker_imageName:$docker_imageTag -t $docker_containerRegistry/$docker_imageName:latest"'
-                sh 'docker build . -t $docker_imageName:$docker_imageTag -t $docker_containerRegistry/$docker_imageName:$docker_imageTag -t $docker_containerRegistry/$docker_imageName:latest'
+                sh 'echo "docker build . -t $docker_imageName:$docker_imageTagRevised -t $docker_containerRegistry/$docker_imageName:$docker_imageTagRevised -t $docker_containerRegistry/$docker_imageName:latest"'
+                sh 'docker build . -t $docker_imageName:$docker_imageTagRevised -t $docker_containerRegistry/$docker_imageName:$docker_imageTagRevised -t $docker_containerRegistry/$docker_imageName:latest'
                 sh 'docker push $docker_containerRegistry/$docker_imageName'
             }
         }
